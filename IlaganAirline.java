@@ -2,9 +2,9 @@ package JavaArray;
 import java.util.Scanner;
 
 public class IlaganAirline {
-    private static boolean[] seats = new boolean[10]; // Seating chart (false indicates empty seat)
-    private static final int FIRST_CLASS_LIMIT = 5;  // First class is seats 1-5
-    private static final int ECONOMY_LIMIT = 10;     // Economy is seats 6-10
+    private static boolean[] seats = new boolean[10]; 
+    private static final int FIRST_CLASS_LIMIT = 5;  
+    private static final int ECONOMY_LIMIT = 10;     
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -12,6 +12,7 @@ public class IlaganAirline {
         
 
         while (true) {
+        	
             System.out.println("Choose 1: First Class or Choose 2: Economy:");
             int sectionChoice = scanner.nextInt();
 
@@ -45,27 +46,27 @@ public class IlaganAirline {
         }
     }
 
-    // Method to assign a seat in First Class (seats 1-5)
+    
     public static boolean assignSeatInFirstClass() {
         for (int i = 0; i < FIRST_CLASS_LIMIT; i++) {
             if (!seats[i]) {
-                seats[i] = true;  // Seat is now taken
+                seats[i] = true;  
                 System.out.println("Boarding pass: Seat " + (i + 1) + " (First Class)");
                 return true;
             }
         }
-        return false;  // First class is full
+        return false;  
     }
 
-    // Method to assign a seat in Economy (seats 6-10)
+    
     public static boolean assignSeatInEconomy() {
         for (int i = FIRST_CLASS_LIMIT; i < ECONOMY_LIMIT; i++) {
             if (!seats[i]) {
-                seats[i] = true;  // Seat is now taken
+                seats[i] = true; 
                 System.out.println("Boarding pass: Seat " + (i + 1) + " (Economy Class)");
                 return true;
             }
         }
-        return false;  // Economy is full
+        return false;
     }
 }
