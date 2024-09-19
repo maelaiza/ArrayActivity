@@ -1,14 +1,71 @@
 package JavaArray;
+import java.util.Scanner;
 
 public class IlaganAirline {
+    private static boolean[] seats = new boolean[10]; // Seating chart (false indicates empty seat)
+    private static final int FIRST_CLASS_LIMIT = 5;  // First class is seats 1-5
+    private static final int ECONOMY_LIMIT = 10;     // Economy is seats 6-10
 
-	public IlaganAirline() {
-		// TODO Auto-generated constructor stub
-	}
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please book your flight");
+        
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        while (true) {
+            System.out.println("Choose 1: First Class or Choose 2: Economy:");
+            int sectionChoice = scanner.nextInt();
 
-	}
+            if (sectionChoice == 1) {
+                if (!assignSeatInFirstClass()) {
+                    System.out.println("First class is full. Would you like to be placed in Economy? (1 for Yes, 0 for No): ");
+                    int response = scanner.nextInt();
+                    if (response == 1) {
+                        if (!assignSeatInEconomy()) {
+                            System.out.println("Economy is also full. Next flight leaves in 3 hours.");
+                        }
+                    } else {
+                        System.out.println("Next flight leaves in 3 hours.");
+                    }
+                }
+            } else if (sectionChoice == 2) {
+                if (!assignSeatInEconomy()) {
+                    System.out.println("Economy is full. Would you like to be placed in First Class? (1 for Yes, 0 for No): ");
+                    int response = scanner.nextInt();
+                    if (response == 1) {
+                        if (!assignSeatInFirstClass()) {
+                            System.out.println("First class is also full. Next flight leaves in 3 hours.");
+                        }
+                    } else {
+                        System.out.println("Next flight leaves in 3 hours.");
+                    }
+                }
+            } else {
+                System.out.println("Invalid input. Please try again.");
+            }
+        }
+    }
 
+    // Method to assign a seat in First Class (seats 1-5)
+    public static boolean assignSeatInFirstClass() {
+        for (int i = 0; i < FIRST_CLASS_LIMIT; i++) {
+            if (!seats[i]) {
+                seats[i] = true;  // Seat is now taken
+                System.out.println("Boarding pass: Seat " + (i + 1) + " (First Class)");
+                return true;
+            }
+        }
+        return false;  // First class is full
+    }
+
+    // Method to assign a seat in Economy (seats 6-10)
+    public static boolean assignSeatInEconomy() {
+        for (int i = FIRST_CLASS_LIMIT; i < ECONOMY_LIMIT; i++) {
+            if (!seats[i]) {
+                seats[i] = true;  // Seat is now taken
+                System.out.println("Boarding pass: Seat " + (i + 1) + " (Economy Class)");
+                return true;
+            }
+        }
+        return false;  // Economy is full
+    }
 }
